@@ -29,7 +29,7 @@ for($tentativa = 1; $tentativa <= $totalTentativas; $tentativa++) {
     );
     echo "Você digitou: $palpite" . PHP_EOL;
 
-    if($palpite < 1 && $palpite > 100) {
+    if($palpite < 1 || $palpite > 100) {
         echo "Você deve digitar um número entre 1 e 100" . PHP_EOL;
         continue;
     }
