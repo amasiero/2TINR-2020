@@ -1,21 +1,19 @@
 <?php
 
 require_once('funcoes.php');
+require_once ('Veiculo.php');
 
-$veiculos = [
-    "ABC-1234" => [
-    "marca" => "Citroen",
-    "modelo" => "C3"
-    ],
-    "DEF-5678" => [
-        "marca" => "Ferrari",
-        "modelo" => "458"
-    ],
-];
+session_start();
 
-adicionaVeiculo($veiculos, "GHI-9012", "Ford", "Shelby Mustang");
-
-$veiculos = removeVeiculo($veiculos, "DEF-5678");
+if(isset($_POST['submitButton'])) {
+    $_SESSION["veiculos"][] = new Veiculo($_POST["placa"],$_POST["marca"],$_POST["modelo"]);
+}else{
+    $veiculos = [
+        new Veiculo("ABC-1234","Citroen","C3"),
+        new Veiculo("DEF-5678", "Ferrari","458")
+    ];
+    $_SESSION["veiculos"] = $veiculos;
+}
 
 ?>
 
@@ -38,7 +36,24 @@ $veiculos = removeVeiculo($veiculos, "DEF-5678");
         </a>
     </nav>
     <section class="container">
-        <table class="table">
+        <h2 class="mt-4">Inserir novo veículo</h2>
+        <form class="mt-4" method="post" action="">
+            <div class="form-group">
+                <label for="inputPlaca">Placa</label>
+                <input type="text" class="form-control" id="inputPlaca" name="placa" placeholder="Digite a placa do veículo.">
+            </div>
+            <div class="form-group">
+                <label for="inputMarca">Marca</label>
+                <input type="text" class="form-control" id="inputMarca" name="marca"  placeholder="Digite a marca do veículo.">
+            </div>
+            <div class="form-group">
+                <label for="inputModelo">Modelo</label>
+                <input type="text" class="form-control" id="inputModelo" name="modelo" placeholder="Digite o modelo do veículo.">
+            </div>
+            <button type="submit" class="btn btn-primary" name="submitButton">Cadastrar entrada</button>
+        </form>
+        <h2 class="mt-4">Veículos Estacionados</h2>
+        <table class="table mt-4">
             <thead>
             <tr>
                 <th>Placa</th>
@@ -47,10 +62,10 @@ $veiculos = removeVeiculo($veiculos, "DEF-5678");
             </thead>
 
             <tbody>
-                <?php foreach ($veiculos as $placa =>$veiculo) { ?>
+                <?php foreach ($_SESSION["veiculos"] as $veiculo) { ?>
                     <tr>
-                        <td><?= $placa ?></td>
-                        <td><?=  "$veiculo[marca] $veiculo[modelo]" ?></td>
+                        <td><?= $veiculo->getPlaca() ?></td>
+                        <td><?=  $veiculo->veiculoInfo() ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
