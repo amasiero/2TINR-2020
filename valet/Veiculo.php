@@ -1,6 +1,5 @@
 <?php
 
-
 class Veiculo
 {
     private string $placa;

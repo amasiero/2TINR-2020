@@ -1,18 +1,13 @@
 <?php
 
-require_once('funcoes.php');
+require_once ('Estacionamento.php');
+require_once ('Ticket.php');
 require_once ('Veiculo.php');
 
-session_start();
+$estacionamento = new Estacionamento();
 
 if(isset($_POST['submitButton'])) {
-    $_SESSION["veiculos"][] = new Veiculo($_POST["placa"],$_POST["marca"],$_POST["modelo"]);
-}else{
-    $veiculos = [
-        new Veiculo("ABC-1234","Citroen","C3"),
-        new Veiculo("DEF-5678", "Ferrari","458")
-    ];
-    $_SESSION["veiculos"] = $veiculos;
+    $estacionamento->estaciona(new Ticket(new Veiculo($_POST["placa"],$_POST["marca"],$_POST["modelo"])));
 }
 
 ?>
@@ -58,14 +53,16 @@ if(isset($_POST['submitButton'])) {
             <tr>
                 <th>Placa</th>
                 <th>Veículo</th>
+                <th>Entrada</th>
             </tr>
             </thead>
 
             <tbody>
-                <?php foreach ($_SESSION["veiculos"] as $veiculo) { ?>
+                <?php foreach ($estacionamento->consultaTodos() as $ticket) { ?>
                     <tr>
-                        <td><?= $veiculo->getPlaca() ?></td>
-                        <td><?=  $veiculo->veiculoInfo() ?></td>
+                        <td><?= $ticket->getVeiculo()->getPlaca() ?></td>
+                        <td><?=  $ticket->getVeiculo()->veiculoInfo() ?></td>
+                        <td><?=  $ticket->getEntrada()->format("d-M-y H:m:s") ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
