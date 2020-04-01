@@ -1,5 +1,4 @@
 <?php
-
 function adicionaVeiculo(array &$veiculos,
                          string $placa,
                          string $marca,

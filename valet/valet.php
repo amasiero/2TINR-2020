@@ -1,14 +1,8 @@
 <?php
 
 require_once ('Estacionamento.php');
-require_once ('Ticket.php');
-require_once ('Veiculo.php');
 
 $estacionamento = new Estacionamento();
-
-if(isset($_POST['submitButton'])) {
-    $estacionamento->estaciona(new Ticket(new Veiculo($_POST["placa"],$_POST["marca"],$_POST["modelo"])));
-}
 
 ?>
 
@@ -32,7 +26,7 @@ if(isset($_POST['submitButton'])) {
     </nav>
     <section class="container">
         <h2 class="mt-4">Inserir novo veículo</h2>
-        <form class="mt-4" method="post" action="">
+        <form class="mt-4" method="post" action="entrada.php">
             <div class="form-group">
                 <label for="inputPlaca">Placa</label>
                 <input type="text" class="form-control" id="inputPlaca" name="placa" placeholder="Digite a placa do veículo.">
@@ -54,17 +48,21 @@ if(isset($_POST['submitButton'])) {
                 <th>Placa</th>
                 <th>Veículo</th>
                 <th>Entrada</th>
+                <th>Ações</th>
             </tr>
             </thead>
 
             <tbody>
-                <?php foreach ($estacionamento->consultaTodos() as $ticket) { ?>
+                <?php foreach ($estacionamento->consultaTodos() as $ticket) {
+                    if(is_null($ticket->getSaida())) {
+                ?>
                     <tr>
                         <td><?= $ticket->getVeiculo()->getPlaca() ?></td>
                         <td><?=  $ticket->getVeiculo()->veiculoInfo() ?></td>
                         <td><?=  $ticket->getEntrada()->format("d-M-y H:m:s") ?></td>
+                        <td><a class="btn btn-danger" href="saida.php?_id=<?= $ticket->getId() ?>">Registrar Saída</a></td>
                     </tr>
-                <?php } ?>
+                <?php }} ?>
             </tbody>
         </table>
     </section>

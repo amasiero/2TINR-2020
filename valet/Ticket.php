@@ -1,25 +1,25 @@
 <?php
 
 require_once("Veiculo.php");
+date_default_timezone_set('America/Sao_Paulo');
 
 class Ticket
 {
-    private static int $id = 0;
+    private String $id;
     private Veiculo $veiculo;
     private DateTime $entrada;
     private DateTime $saida;
-    private double $preco;
+    private float $preco;
 
     public function __construct(Veiculo $veiculo, $entrada = null)
     {
-        Ticket::$id++;
         $this->veiculo = $veiculo;
         $this->entrada = $entrada == null ? new DateTime() : $entrada;
     }
 
-    public static function getId(): int
+    public function getId(): String
     {
-        return self::$id;
+        return $this->id;
     }
 
     public function getVeiculo(): Veiculo
@@ -32,9 +32,29 @@ class Ticket
         return $this->entrada;
     }
 
-    public function getSaida(): DateTime
+    public function getSaida()
     {
-        return $this->saida;
+        return isset($this->saida) ? $this->saida : null;
+    }
+
+    public function getPreco() : float
+    {
+        return $this->preco;
+    }
+
+    public function setId(String $id) : void
+    {
+        $this->id = $id;
+    }
+
+    public function setSaida(Datetime $saida) : void
+    {
+        $this->saida = $saida;
+    }
+
+    public function setPreco(float $preco) : void
+    {
+        $this->preco = $preco;
     }
 
     public function registraSaida(): void
@@ -46,7 +66,7 @@ class Ticket
 
     private function calculaValorEstacionamento(DateInterval $diff)
     {
-        return $diff->h * 3;
+        return floatval($diff->h * 3);
     }
 }
 

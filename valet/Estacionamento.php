@@ -2,38 +2,41 @@
 
 require_once("Ticket.php");
 require_once ("Veiculo.php");
+require_once ("EstacionamentoDAO.php");
 
 class Estacionamento
 {
-    private static $tickets = [];
+    private array $tickets;
+    private EstacionamentoDAO $dao;
 
     public function __construct()
     {
-        self::$tickets[] = new Ticket(new Veiculo("ABC-1234", "Citroen", "C3"), new DateTime("2020-03-10T15:52:01+03:00"));
-        self::$tickets[] = new Ticket(new Veiculo("DEF-5678", "Ferrari", "458"), new DateTime("2020-03-10T15:22:00+03:00"));
+        $this->dao = new EstacionamentoDAO();
+        $this->tickets = $this->dao->consultaTodos();
     }
 
     public function estaciona(Ticket $ticket) : void
     {
-        self::$tickets[] = $ticket;
+        $this->dao->adiciona($ticket);
     }
 
-    public function sai(int $id) : void
+    public function sai(String $id) : void
     {
         $ticket = $this->consultaPorId($id);
         if ($ticket == null) throw new Exception("Ticket não encontrado.");
         $ticket->registraSaida();
+        $this->dao->atualiza($ticket);
     }
 
     public function consultaTodos()
     {
-        return self::$tickets;
+        return $this->tickets;
     }
 
-    public function consultaPorId(int $id) : Ticket
+    public function consultaPorId(String $id) : Ticket
     {
-        foreach (self::$tickets as $ticket) {
-            if($ticket->id == $id) {
+        foreach ($this->tickets as $ticket) {
+            if($ticket->getId() == $id) {
                 return $ticket;
             }
         }
