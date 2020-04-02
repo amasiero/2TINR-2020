@@ -1,0 +1,5 @@
+<h1>{{ title }}</h1>
+<mp-photo *ngFor="let photo of photos"
+  [url]="photo.url"
+  [description]="photo.description" >
+</mp-photo>
