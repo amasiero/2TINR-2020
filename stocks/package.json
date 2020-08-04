@@ -1,0 +1,33 @@
+{
+  "name": "stocks",
+  "version": "1.0.0",
+  "description": "Controle de compra e venda de ações",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js --ignore *.marko.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amasiero/2TINR-2020.git"
+  },
+  "keywords": [
+    "stocks",
+    "node",
+    "app"
+  ],
+  "author": "Andrey Masiero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amasiero/2TINR-2020/issues"
+  },
+  "homepage": "https://github.com/amasiero/2TINR-2020#readme",
+  "dependencies": {
+    "express": "4.16.3",
+    "marko": "4.13.4-1"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.4"
+  }
+}
