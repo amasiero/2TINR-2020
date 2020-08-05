@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='utf-8' />
+        <title>Stocks Portifolio</title>
+    </head>
+    <body>
+        <h1>Stocks Portifolio</h1>
+        <hr />
+        <table border=1>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Empresa</th>
+                    <th>Quantidade</th>
+                    <th>Valor Unitário</th>
+                    <th>Valor Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr for (stock in data.stocks)>
+                    <td>${stock.code}</td>
+                    <td>${stock.name}</td>
+                    <td>${stock.amount}</td>
+                    <td>R$ ${stock.price}</td>
+                    <td>R$ ${stock.amount * stock.price}</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
