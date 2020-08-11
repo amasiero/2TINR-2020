@@ -25,9 +25,10 @@
   "homepage": "https://github.com/amasiero/2TINR-2020#readme",
   "dependencies": {
     "express": "4.16.3",
-    "marko": "4.13.4-1"
+    "marko": "4.13.4-1",
+    "sqlite3": "4.0.2"
   },
   "devDependencies": {
-    "nodemon": "1.18.4"
+    "nodemon": "2.0.4"
   }
 }

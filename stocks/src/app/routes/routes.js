@@ -1,4 +1,9 @@
+const db = require('../../config/database');
+const StockDao = require('../infra/stock-dao');
+
 module.exports = (app) => {
+    
+
     app.get('/', (req, resp) => {
         resp.send(`
             <html>
@@ -13,24 +18,17 @@ module.exports = (app) => {
     });
 
     app.get('/stocks', (req, resp) => {
-        resp.marko(
-            require('../views/portifolio/portifolio.marko'),
-            {
-                stocks: [
-                    {
-                        code: 'VVAR3',
-                        name: 'Via Varejo',
-                        amount: 1000,
-                        price: 19.52,
-                    },
-                    {
-                        code: 'BIDI4',
-                        name: 'Banco Inter',
-                        amount: 1000,
-                        price: 20.58,
-                    },
-                ]
-            }
-        );
+        const dao = new StockDao(db);
+        dao.list()
+            .then(stocks => resp.marko(
+                    require('../views/portifolio/portifolio.marko'),
+                    { stocks }
+            ))            
+            .catch(err => console.error(err));
+        
     });
+
+    app.get('/stocks/buy', (req, resp) => 
+        resp.marko(require('../views/portifolio/new.marko'))
+    );
 }
