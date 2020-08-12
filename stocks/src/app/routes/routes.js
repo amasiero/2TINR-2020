@@ -31,4 +31,14 @@ module.exports = (app) => {
     app.get('/stocks/buy', (req, resp) => 
         resp.marko(require('../views/portifolio/new.marko'))
     );
+
+    app.post('/stocks', (req, resp) => {
+        console.log(req.body);
+        
+        const dao = new StockDao(db);
+        dao.save(req.body)
+            .then(resp.redirect('/stocks'))
+            .catch(err => console.error(err));
+
+    });
 }
