@@ -3,33 +3,46 @@
     <head>
         <meta charset='utf-8' />
         <title>Stocks Portifolio</title>
+        <link rel='stylesheet' href='/resource/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='/resource/css/all.min.css'>
     </head>
     <body>
-        <h1>Compre sua Ação</h1>
-        <hr />
-        <form action='/stocks' method='POST'>
-            <input type='hidden' id='id' name='id' />
-            <div>
-                <label for='code'>Código</label>
-                <input type='text' id='code' name='code' 
-                    placeholder='Digite o código da ação desejada.' />
+        <main class='main-container'>
+            <div class='container'>
+                <h1>Compre sua Ação</h1>
+                <hr />
+                <form action='/stocks' method='POST'>
+                    <div if(data.stock.id)>
+                        <input type='hidden' name='_method' value='PUT'>
+                        <input type='hidden' id='id' name='id' value="${data.stock.id}"/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='code'>Código</label>
+                        <input type='text' id='code' name='code' value="${data.stock.code}"
+                            placeholder='Digite o código da ação desejada.' 
+                            class='form-control'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='name'>Empresa</label>
+                        <input type='text' id='name' name='name' value="${data.stock.name}"
+                            placeholder='Digite o nome da empresa para a ação desejada.'
+                            class='form-control'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='amount'>Quantidade</label>
+                        <input type='number' id='amount' name='amount' value="${data.stock.amount}"
+                            placeholder='Digite a quantidade de ações desejada.'
+                            class='form-control'/>
+                    </div>
+                    <div class='form-group'>
+                        <label for='price'>Valor Unitário</label>
+                        <input type='number' id='price' name='price' step='.01' value="${data.stock.price}"
+                            placeholder='Digite o valor unitário da ação desejada.'
+                            class='form-control'/>
+                    </div>
+                    <button type='submit' class='btn btn-primary'>Comprar</button>
+                </form>
             </div>
-            <div>
-                <label for='name'>Empresa</label>
-                <input type='text' id='name' name='name' 
-                    placeholder='Digite o nome da empresa para a ação desejada.' />
-            </div>
-            <div>
-                <label for='amount'>Quantidade</label>
-                <input type='number' id='amount' name='amount' 
-                    placeholder='Digite a quantidade de ações desejada.' />
-            </div>
-            <div>
-                <label for='price'>Valor Unitário</label>
-                <input type='number' id='price' name='price' step='.01'
-                    placeholder='Digite o valor unitário da ação desejada.' />
-            </div>
-            <button type='submit'>Comprar</button>
-        </form>
+        </main>
     </body>
 </html>

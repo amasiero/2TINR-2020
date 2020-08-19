@@ -11,41 +11,54 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
     component_globals_tag = marko_loadTag(require("marko/src/components/taglib/component-globals-tag")),
     marko_forEach = marko_helpers.f,
     marko_escapeXml = marko_helpers.x,
+    marko_escapeXmlAttr = marko_helpers.xa,
     init_components_tag = marko_loadTag(require("marko/src/components/taglib/init-components-tag")),
     await_reorderer_tag = marko_loadTag(require("marko/src/taglibs/async/await-reorderer-tag"));
 
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Stocks Portifolio</title></head><body>");
+  out.w("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Stocks Portifolio</title><link rel=\"stylesheet\" href=\"/resource/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/resource/css/all.min.css\"></head><body>");
 
   component_globals_tag({}, out);
 
-  out.w("<h1>Stocks Portifolio</h1><hr><table border=1><thead><tr><th>Código</th><th>Empresa</th><th>Quantidade</th><th>Valor Unitário</th><th>Valor Total</th></tr></thead><tbody>");
+  out.w("<main class=\"main-container\"><div class=\"container\"><h1>Stocks Portifolio</h1><hr><table border=1 class=\"table table-striped table-hover\"><thead class=\"thead-dark\"><tr><th>Código</th><th>Empresa</th><th>Quantidade</th><th>Valor Unitário</th><th>Valor Total</th><th>Atualizar</th><th>Excluir</th></tr></thead><tbody id=\"stocks\">");
 
-  var for__16 = 0;
+  var for__22 = 0;
 
   marko_forEach(data.stocks, function(stock) {
-    var keyscope__17 = "[" + ((for__16++) + "]");
+    var keyscope__23 = "[" + ((for__22++) + "]");
 
-    out.w("<tr><td>" +
+    out.w("<tr id=\"stock_" +
+      marko_escapeXmlAttr(stock.id) +
+      "\"><td>" +
       marko_escapeXml(stock.code) +
       "</td><td>" +
       marko_escapeXml(stock.name) +
       "</td><td>" +
       marko_escapeXml(stock.amount) +
-      "</td><td>R$ " +
-      marko_escapeXml(stock.price) +
-      "</td><td>R$ " +
-      marko_escapeXml(stock.amount * stock.price) +
-      "</td></tr>");
+      "</td><td>" +
+      marko_escapeXml(stock.price.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      })) +
+      "</td><td>" +
+      marko_escapeXml(parseFloat(stock.amount * stock.price).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      })) +
+      "</td><td><a href=\"/stocks/buy/" +
+      marko_escapeXmlAttr(stock.id) +
+      "\"><i class=\"far fa-edit text-dark\"></i></a></td><td><a href=\"#\" data-ref=\"" +
+      marko_escapeXmlAttr(stock.id) +
+      "\" data-type=\"delete\"><i class=\"far fa-trash-alt text-dark\"></i></a></td></tr>");
   });
 
-  out.w("</tbody></table>");
+  out.w("</tbody></table></div></main><script src=\"/resource/js/delete-stock.js\"></script>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "24");
+  await_reorderer_tag({}, out, __component, "37");
 
   out.w("</body></html>");
 }

@@ -3,29 +3,58 @@
     <head>
         <meta charset='utf-8' />
         <title>Stocks Portifolio</title>
+        <link rel='stylesheet' href='/resource/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='/resource/css/all.min.css'>
     </head>
     <body>
-        <h1>Stocks Portifolio</h1>
-        <hr />
-        <table border=1>
-            <thead>
-                <tr>
-                    <th>Código</th>
-                    <th>Empresa</th>
-                    <th>Quantidade</th>
-                    <th>Valor Unitário</th>
-                    <th>Valor Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr for (stock in data.stocks)>
-                    <td>${stock.code}</td>
-                    <td>${stock.name}</td>
-                    <td>${stock.amount}</td>
-                    <td>R$ ${stock.price}</td>
-                    <td>R$ ${stock.amount * stock.price}</td>
-                </tr>
-            </tbody>
-        </table>
+        <main class='main-container'>
+            <div class='container'>
+                <h1>Stocks Portifolio</h1>
+                <hr />
+                <table border=1 class='table table-striped table-hover'>
+                    <thead class='thead-dark'>
+                        <tr>
+                            <th>Código</th>
+                            <th>Empresa</th>
+                            <th>Quantidade</th>
+                            <th>Valor Unitário</th>
+                            <th>Valor Total</th>
+                            <th>Atualizar</th>
+                            <th>Excluir</th>
+                        </tr>
+                    </thead>
+                    <tbody id='stocks'>
+                        <tr id='stock_${stock.id}' for (stock in data.stocks)>
+                            <td>${stock.code}</td>
+                            <td>${stock.name}</td>
+                            <td>${stock.amount}</td>
+                            <td>
+                                ${stock.price.toLocaleString('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL',
+                                })}
+                            </td>
+                            <td>
+                                ${parseFloat(stock.amount * stock.price).toLocaleString('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL',
+                                })}
+                            </td>
+                            <td>
+                                <a href='/stocks/buy/${stock.id}'>
+                                    <i class='far fa-edit text-dark'></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href='#' data-ref='${stock.id}' data-type='delete'>
+                                    <i class='far fa-trash-alt text-dark'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <script src='/resource/js/delete-stock.js'></script>
     </body>
 </html>
