@@ -42,7 +42,7 @@ module.exports = (app) => {
 
 		const errors = contactValidator(contact);
 		if (errors) {
-			res.status(400).json(errors);
+			res.status(400).json({ errors: errors });
 			return;
 		}
 
