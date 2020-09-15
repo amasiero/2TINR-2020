@@ -18,16 +18,16 @@ var marko_template = module.exports = require("marko/src/html").t(__filename),
 function render(input, out, __component, component, state) {
   var data = input;
 
-  out.w("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Stocks Portifolio</title><link rel=\"stylesheet\" href=\"/resource/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/resource/css/all.min.css\"></head><body>");
+  out.w("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Stocks Portifolio</title><link href=\"https://fonts.googleapis.com/css2?family=Bangers&amp;display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"/resource/css/bootstrap.min.css\"><link rel=\"stylesheet\" href=\"/resource/css/all.min.css\"><link rel=\"stylesheet\" href=\"/resource/css/main.css\"></head><body>");
 
   component_globals_tag({}, out);
 
-  out.w("<main class=\"main-container\"><div class=\"container\"><h1>Stocks Portifolio</h1><hr><table border=1 class=\"table table-striped table-hover\"><thead class=\"thead-dark\"><tr><th>Código</th><th>Empresa</th><th>Quantidade</th><th>Valor Unitário</th><th>Valor Total</th><th>Atualizar</th><th>Excluir</th></tr></thead><tbody id=\"stocks\">");
+  out.w("<header class=\"main-header d-flex align-items-center\"><div class=\"container\"><div class=\"row align-items-center\"><div class=\"col-4\"><h1 class=\"logo\">Stocks Rocks!</h1></div><div class=\"main-header-nav col-8\"><a href=\"#\" class=\"login p-3\"><i class=\"fas fa-sign-in-alt mr-2\"></i>Login</a></div></div></div></header><main class=\"main-container\"><div class=\"container\"><h1 class=\"mt-3 mb-2\">Stocks Portifolio</h1><hr><table border=1 class=\"table table-striped table-hover\"><thead class=\"thead-dark\"><tr><th>Código</th><th>Empresa</th><th>Quantidade</th><th>Valor Unitário</th><th>Valor Total</th><th>Atualizar</th><th>Excluir</th></tr></thead><tbody id=\"stocks\">");
 
-  var for__22 = 0;
+  var for__32 = 0;
 
   marko_forEach(data.stocks, function(stock) {
-    var keyscope__23 = "[" + ((for__22++) + "]");
+    var keyscope__33 = "[" + ((for__32++) + "]");
 
     out.w("<tr id=\"stock_" +
       marko_escapeXmlAttr(stock.id) +
@@ -54,11 +54,11 @@ function render(input, out, __component, component, state) {
       "\" data-type=\"delete\"><i class=\"far fa-trash-alt text-dark\"></i></a></td></tr>");
   });
 
-  out.w("</tbody></table></div></main><script src=\"/resource/js/delete-stock.js\"></script>");
+  out.w("</tbody></table></div></main><footer class=\"main-footer bg-dark mt-4\"><div class=\"container\"><p class=\"text-light text-center p-3\">Developed by Andrey Masiero - &copy; 2020</p></div></footer><script src=\"/resource/js/delete-stock.js\"></script>");
 
   init_components_tag({}, out);
 
-  await_reorderer_tag({}, out, __component, "37");
+  await_reorderer_tag({}, out, __component, "50");
 
   out.w("</body></html>");
 }

@@ -1,15 +1,15 @@
 const stockTable = document.querySelector('#stocks');
-stockTable.addEventListener('click', event => {
-    const clicked = event.target;
-    
-    if(clicked.dataset.type === 'delete') {
-        const stockId = clicked.dataset.ref;
+stockTable.addEventListener('click', (event) => {
+	const clicked = event.target.parentNode;
 
-        fetch(`http://localhost:3000/stocks/${stockId}`, { method: 'DELETE' })
-            .then(result => {
-                const tr = clicked.closest(`#stock_${stockId}`);
-                tr.remove();
-            })
-            .catch(err => console.error(err));
-    }
+	if (clicked.dataset.type === 'delete') {
+		const stockId = clicked.dataset.ref;
+
+		fetch(`http://localhost:3000/stocks/${stockId}`, { method: 'DELETE' })
+			.then((result) => {
+				const tr = clicked.closest(`#stock_${stockId}`);
+				tr.remove();
+			})
+			.catch((err) => console.error(err));
+	}
 });

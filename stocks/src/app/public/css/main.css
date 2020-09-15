@@ -1,0 +1,48 @@
+.main-header {
+	background-color: #343a40;
+	height: 100px;
+}
+
+.main-header .logo {
+	color: #fff;
+	font-size: 40px;
+	font-family: 'Bangers', cursive;
+}
+
+.main-header-nav {
+	text-align: right;
+}
+
+.main-header-nav .login {
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 8px;
+	font-size: 20px;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.main-content {
+	min-height: 70%;
+}
+
+.error-container {
+	display: flex;
+	height: 400px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.error-container p {
+	font-size: 3em;
+	text-align: center;
+}
+
+.error-container a {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.status-code {
+	font-size: 12em;
+}
