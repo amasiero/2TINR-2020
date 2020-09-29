@@ -36,7 +36,7 @@
                         </ul>
                     </div>
                 </div>
-                <form action='/stocks' method='POST'>
+                <form action='/stocks/buy' method='POST'>
                     <div if(data.stock.id)>
                         <input type='hidden' name='_method' value='PUT'>
                         <input type='hidden' id='id' name='id' value="${data.stock.id}"/>

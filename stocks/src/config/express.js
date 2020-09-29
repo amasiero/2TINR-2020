@@ -19,15 +19,15 @@ app.use(
 );
 
 const routes = require('../app/routes/routes');
-const { a } = require('marko/src/runtime/html/helpers');
 routes(app);
 
+const templates = require('../app/views/templates');
 app.use(function (req, resp, next) {
-	return resp.status(404).marko(require('../app/views/base/errors/404.marko'));
+	return resp.status(404).marko(templates.base.erro404);
 });
 
 app.use(function (req, resp, next) {
-	return resp.status(500).marko(require('../app/views/base/errors/500.marko'));
+	return resp.status(500).marko(templates.base.erro500);
 });
 
 module.exports = app;
