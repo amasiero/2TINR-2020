@@ -25,7 +25,7 @@
   "homepage": "https://github.com/amasiero/2TINR-2020#readme",
   "dependencies": {
     "body-parser": "1.18.3",
-    "express": "4.16.3",
+    "express": "4.17.3",
     "express-validator": "5.3.1",
     "marko": "4.13.4-1",
     "method-override": "3.0.0",
